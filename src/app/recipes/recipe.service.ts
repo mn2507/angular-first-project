@@ -8,22 +8,29 @@ import { Subject } from 'rxjs';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Saapadu oh',
-      'Nalla irukkum',
-      'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg',
-      [new Ingredient('Egg', 2), new Ingredient('Meat', 3)]
-    ),
-    new Recipe(
-      'Burger Oh',
-      'Sumaarah irukkum',
-      'https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/master/pass/Smashburger-recipe-120219.jpg',
-      [new Ingredient('Buns', 2), new Ingredient('Tomato', 1)]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Saapadu oh',
+  //     'Nalla irukkum',
+  //     'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg',
+  //     [new Ingredient('Egg', 2), new Ingredient('Meat', 3)]
+  //   ),
+  //   new Recipe(
+  //     'Burger Oh',
+  //     'Sumaarah irukkum',
+  //     'https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/master/pass/Smashburger-recipe-120219.jpg',
+  //     [new Ingredient('Buns', 2), new Ingredient('Tomato', 1)]
+  //   ),
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
